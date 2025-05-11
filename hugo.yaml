@@ -1,13 +1,80 @@
-baseURL: https://blog.acmsz.top
+baseURL: https://blog.acmsz.top/
 languageCode: zh_cn
 title: CMSZ的博客
 copyright: CMSZ
 theme: hugo-theme-stack
+timeZone: "Asia/Shanghai"
 
 DefaultContentLanguage: zh-cn
 
 highlight:
   style: github-dark
+
+params:
+  fancybox: true
+  contact:
+    email: me@acmsz.top
+  footer:
+    since: 2025
+  mainSections:
+    - posts
+  featuredImageField: image
+  rssFullContent: true
+  favicon: /favicon.ico
+  dateFormat:
+    published: 2006-01-02
+    lastUpdated: 2006-01-02 15:04 MST
+    widgets:
+      homepage:
+        - type: search
+        - type: archives
+          params:
+            limit: 5
+        - type: categories
+          params:
+            limit: 10
+        - type: tag-cloud
+          params:
+            limit: 10
+      page:
+        - type: toc
+
+
+menu:
+  main: 
+    - identifier: home
+      name: 主页
+      url: /
+      weight: 1
+      params:
+        icon: home
+
+  social:
+    - identifier: github
+      name: GitHub
+      url: https://github.com/CMSZ001
+      weight: 1
+      params:
+        icon: brand-github
+
+    - identifier: mail
+      name: Mail
+      url: mailto:me@acmsz.top
+      weight: 2
+      params:
+        icon: mail
+
+        
+    - identifier: rss
+      name: RSS
+      url: /index.xml
+      weight: 3
+      params:
+        icon: rss
+
+permalinks:
+    post: /post/:slug/
+    page: /:slug/
 
 comments:
   enabled: true
@@ -41,8 +108,16 @@ comments:
 
 params:
   sidebar:
-    emoji: 🍥
+    compact: true
+    emoji: 🙃
     avatar:
       enabled: true
       local: true
       src: imgs/avatar.png
+
+article:
+  math: true
+  toc: true
+  license:
+    enabled: true
+    default: 本作品 采用 CC BY-NC-SA 4.0 协议。 
