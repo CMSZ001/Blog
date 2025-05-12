@@ -5,7 +5,9 @@ copyright: CMSZ
 theme: hugo-theme-stack
 timeZone: "Asia/Shanghai"
 
-DefaultContentLanguage: zh-cn
+DefaultContentLanguage: 
+  - zh-cn
+  - en
 
 highlight:
   style: github-dark
