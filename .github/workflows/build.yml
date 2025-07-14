@@ -1,18 +1,18 @@
-name: Build Astro
+name: Deploy Astro SSR to Netlify
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - uses: actions/setup-node@v4
         with:
@@ -22,9 +22,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
-      - uses: netlify/actions/cli@main
-        with:
-          args: deploy --prod --dir=dist
+      - name: Deploy to Netlify
+        run: npx netlify-cli deploy --prod --dir=dist
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
