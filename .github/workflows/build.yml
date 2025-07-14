@@ -1,4 +1,4 @@
-name: Build Astro
+name: Build Astro SSR & Deploy to Netlify
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,12 +25,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build static site
+      - name: Build Astro SSR site
         run: pnpm build
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: pages
+          args: deploy --prod --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
