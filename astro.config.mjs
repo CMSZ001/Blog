@@ -40,7 +40,7 @@ export default defineConfig({
         destination: 'https://github.cmsz.dpdns.org/',
     }
     },
-    output: 'server',
+    output: 'static',
 	adapter: netlify(),
 	prefetch: true,
 	integrations: [
