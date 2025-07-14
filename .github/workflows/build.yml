@@ -1,33 +1,35 @@
+# .github/workflows/deploy-netlify.yml
 name: Deploy to Netlify
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: npm  # 如果你有 pnpm.lock / yarn.lock，改成 pnpm 或 yarn
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci   # 或 pnpm install / yarn install --frozen-lockfile
 
       - name: Build site
-        run: npm run build
+        run: npm run build   # 确保 package.json 里有 "build": "astro build"
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --dir=dist
+          args: deploy --dir=dist --prod   # dist 是 Astro 默认输出目录
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID:    ${{ secrets.NETLIFY_SITE_ID }}
