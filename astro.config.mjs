@@ -38,10 +38,6 @@ export default defineConfig({
     '/github/': {
         status: 301,
         destination: 'https://github.cmsz.dpdns.org/',
-    },
-	'/github/[...slug]': {
-        status: 301,
-        destination: 'https://github.cmsz.dpdns.org/[...slug]',
     }
     },
     output: 'static',
