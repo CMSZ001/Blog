@@ -26,7 +26,7 @@ const config = profileConfig;
             <span id="hitokotoCursor" class="cursor">｜</span>
         </div>
         <script is:inline>
-            fetch('https://v1.hitokoto.cn/?encode=text')
+            fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
               .then(r => r.text())
               .then(typeWriter)
               .catch(() => {
@@ -45,7 +45,7 @@ const config = profileConfig;
                   clearInterval(timer);
                   cursorEl.style.display = 'none';
                 }
-              }, 60);
+              }, 100);
             }
           </script>
         <div class="flex gap-2 justify-center mb-1">
