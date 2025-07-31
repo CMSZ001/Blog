@@ -26,27 +26,28 @@ const config = profileConfig;
             <span id="hitokotoCursor" class="cursor">｜</span>
         </div>
         <script is:inline>
-            fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
-              .then(r => r.text())
-              .then(typeWriter)
-              .catch(() => {
-                // 接口失败时，回退到 config.bio
-                document.querySelector('#hitokotoText').textContent = '{config.bio}';
-                document.querySelector('#hitokotoCursor').style.display = 'none';
-              });
+            window.addEventListener('DOMContentLoaded', () => {
+              fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
+                .then(r => r.text())
+                .then(typeWriter)
+                .catch(() => {
+                  document.querySelector('#hitokotoText').textContent = '{config.bio}';
+                  document.querySelector('#hitokotoCursor').style.display = 'none';
+                });
           
-            function typeWriter(str) {
-              const textEl = document.querySelector('#hitokotoText');
-              const cursorEl = document.querySelector('#hitokotoCursor');
-              let i = 0;
-              const timer = setInterval(() => {
-                textEl.textContent += str[i++];
-                if (i === str.length) {
-                  clearInterval(timer);
-                  cursorEl.style.display = 'none';
-                }
-              }, 100);
-            }
+              function typeWriter(str) {
+                const textEl = document.querySelector('#hitokotoText');
+                const cursorEl = document.querySelector('#hitokotoCursor');
+                let i = 0;
+                const timer = setInterval(() => {
+                  textEl.textContent += str[i++];
+                  if (i === str.length) {
+                    clearInterval(timer);
+                    cursorEl.style.display = 'none';
+                  }
+                }, 100);
+              }
+            });
           </script>
         <div class="flex gap-2 justify-center mb-1">
             {config.links.length > 1 && config.links.map(item =>
