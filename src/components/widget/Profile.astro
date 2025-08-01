@@ -6,66 +6,169 @@ import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
 ---
-<div class="card-base p-3">
-    <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
-            <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
-            </Icon>
-        </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
-    </a>
-    <div class="px-2">
-        <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
-        <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition" id="hitokoto">
-            <span id="hitokotoText"></span>
-            <span id="hitokotoCursor" class="cursor">｜</span>
-        </div>
-        <script is:inline>
-            // 确保代码只在浏览器环境中执行
-            document.addEventListener('DOMContentLoaded', function() {
-              // 每次页面加载都重新获取新的一言内容
-              fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
-                .then(r => r.text())
-                .then(text => {
-                  typeWriter(text);
-                })
-                .catch(() => {
-                  // 接口失败时，回退到 config.bio
-                  document.querySelector('#hitokotoText').textContent = "世界美好与莫环环相扣。";
-                  document.querySelector('#hitokotoCursor').style.display = 'none';
-                });
-            });
-          
-            function typeWriter(str) {
-              const textEl = document.querySelector('#hitokotoText');
-              const cursorEl = document.querySelector('#hitokotoCursor');
-              let i = 0;
-              const timer = setInterval(() => {
-                textEl.textContent += str[i++];
-                if (i === str.length) {
-                  clearInterval(timer);
-                  cursorEl.style.display = 'none';
-                }
-              }, 100);
-            }
-          </script>
-        <div class="flex gap-2 justify-center mb-1">
-            {config.links.length > 1 && config.links.map(item =>
-                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                    </a>
-            )}
-            {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={config.links[0].icon} class="text-[1.5rem]"></Icon>
-                {config.links[0].name}
-            </a>}
-        </div>
-    </div>
-</div>
 
+<div class="card-base p-3">
+  <a
+    aria-label="Go to About Page"
+    href={url("/about/")}
+    class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3 max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"
+  >
+    <div
+      class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center"
+    >
+      <Icon
+        name="fa6-regular:address-card"
+        class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl"
+      />
+    </div>
+    <ImageWrapper
+      src={config.avatar || ""}
+      alt="Profile Image of the Author"
+      class="mx-auto lg:w-full h-full lg:mt-0"
+    />
+  </a>
+  <div class="px-2">
+    <div
+      class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition"
+    >
+      {config.name}
+    </div>
+    <div
+      class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"
+    >
+    </div>
+    <div class="text-center text-neutral-400 mb-2.5 transition" id="hitokoto">
+      <span id="hitokotoText"></span>
+      <span id="hitokotoCursor" class="cursor">｜</span>
+    </div>
+    <script is:inline>
+      // 确保代码只在浏览器环境中执行
+      document.addEventListener("DOMContentLoaded", function () {
+        // 每次页面加载都重新获取新的一言内容
+        fetch("https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text")
+          .then((r) => r.text())
+          .then((text) => {
+            typeWriter(text);
+          })
+          .catch(() => {
+            // 接口失败时，回退到 config.bio
+            document.querySelector("#hitokotoText").textContent =
+              "世界美好与莫环环相扣。";
+            document.querySelector("#hitokotoCursor").style.display = "none";
+          });
+      });
+
+      function typeWriter(str) {
+        const textEl = document.querySelector("#hitokotoText");
+        const cursorEl = document.querySelector("#hitokotoCursor");
+        let i = 0;
+        const timer = setInterval(() => {
+          textEl.textContent += str[i++];
+          if (i === str.length) {
+            clearInterval(timer);
+            cursorEl.style.display = "none";
+          }
+        }, 100);
+      }
+    </script>
+    <div class="flex gap-2 justify-center mb-1">
+      {
+        config.links.length > 1 &&
+          config.links.map((item) => (
+            <a
+              rel="me"
+              aria-label={item.name}
+              href={item.url}
+              target="_blank"
+              class="btn-regular rounded-lg h-10 w-10 active:scale-90"
+            >
+              <Icon name={item.icon} class="text-[1.5rem]" />
+            </a>
+          ))
+      }
+      {
+        config.links.length == 1 && (
+          <a
+            rel="me"
+            aria-label={config.links[0].name}
+            href={config.links[0].url}
+            target="_blank"
+            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95"
+          >
+            <Icon name={config.links[0].icon} class="text-[1.5rem]" />
+            {config.links[0].name}
+          </a>
+        )
+      }
+    </div>
+    <div class="flex items-center justify-center gap-1">
+      <Icon name="material-symbols:visibility-outline" class="text-base" />
+      <span id="site-stats">加载中...</span>
+    </div>
+    <script is:inline>
+      (function () {
+        const umamiConfig = {
+          enable: true,
+          baseUrl: "https://umami.acmsz.top",
+          shareId: "CFirWMQoiIUmgPLm",
+          timezone: "Asia/Shanghai",
+        };
+
+        // 获取全站访问量统计
+        async function loadSiteStats() {
+          if (!umamiConfig.enable) {
+            return;
+          }
+
+          try {
+            // 第一步：获取网站ID和token
+            const shareResponse = await fetch(
+              `${umamiConfig.baseUrl}/api/share/${umamiConfig.shareId}`
+            );
+            if (!shareResponse.ok) {
+              throw new Error("获取分享信息失败");
+            }
+            const shareData = await shareResponse.json();
+            const { websiteId, token } = shareData;
+
+            // 第二步：获取全站统计数据（不指定url参数获取全站数据）
+            const currentTimestamp = Date.now();
+            const statsUrl = `${
+              umamiConfig.baseUrl
+            }/api/websites/${websiteId}/stats?startAt=0&endAt=${currentTimestamp}&unit=hour&timezone=${encodeURIComponent(
+              umamiConfig.timezone
+            )}&compare=false`;
+
+            const statsResponse = await fetch(statsUrl, {
+              headers: {
+                "x-umami-share-token": token,
+              },
+            });
+
+            if (!statsResponse.ok) {
+              throw new Error("获取统计数据失败");
+            }
+
+            const statsData = await statsResponse.json();
+            const pageviews = statsData.pageviews?.value || 0;
+            const visitors = statsData.visits?.value || 0;
+
+            const statsElement = document.getElementById("site-stats");
+            if (statsElement) {
+              statsElement.textContent = `浏览量 ${pageviews} · 访问数 ${visitors}`;
+            }
+          } catch (error) {
+            console.error("获取全站统计失败:", error);
+            const statsElement = document.getElementById("site-stats");
+            if (statsElement) {
+              statsElement.textContent = "统计不可用";
+            }
+          }
+        }
+
+        // 页面加载完成后获取统计数据
+        document.addEventListener("DOMContentLoaded", loadSiteStats);
+      })();
+    </script>
+  </div>
+</div>
