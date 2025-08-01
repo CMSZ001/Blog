@@ -25,6 +25,10 @@ const config = profileConfig;
             <span id="hitokotoText"></span>
             <span id="hitokotoCursor" class="cursor">｜</span>
         </div>
+        <script define:vars={{profileConfig}} is:inline>
+            // 将配置暴露到全局变量
+            window.profileConfig = profileConfig;
+        </script>
         <script is:inline>
             // 确保代码只在浏览器环境中执行
             document.addEventListener('DOMContentLoaded', function() {
@@ -36,7 +40,7 @@ const config = profileConfig;
                 })
                 .catch(() => {
                   // 接口失败时，回退到 config.bio
-                  document.querySelector('#hitokotoText').textContent = "世界美好与莫环环相扣。";
+                  document.querySelector('#hitokotoText').textContent = window.profileConfig?.bio || "世界美好与莫环环相扣。";
                   document.querySelector('#hitokotoCursor').style.display = 'none';
                 });
             });
