@@ -28,27 +28,17 @@ const config = profileConfig;
         <script is:inline>
             // 确保代码只在浏览器环境中执行
             document.addEventListener('DOMContentLoaded', function() {
-              // 使用会话存储，只在当前会话中保持一言不变，页面刷新后会重新获取
-              const sessionHitokoto = sessionStorage.getItem('hitokoto');
-              
-              // 如果当前会话中已有一言，直接使用
-              if (sessionHitokoto) {
-                typeWriter(sessionHitokoto);
-              } else {
-                // 否则重新获取
-                fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
-                  .then(r => r.text())
-                  .then(text => {
-                    // 保存到sessionStorage，页面刷新后会清除
-                    sessionStorage.setItem('hitokoto', text);
-                    typeWriter(text);
-                  })
-                  .catch(() => {
-                    // 接口失败时，回退到 config.bio
-                    document.querySelector('#hitokotoText').textContent = "世界美好与莫环环相扣。";
-                    document.querySelector('#hitokotoCursor').style.display = 'none';
-                  });
-              }
+              // 每次页面加载都重新获取新的一言内容
+              fetch('https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text')
+                .then(r => r.text())
+                .then(text => {
+                  typeWriter(text);
+                })
+                .catch(() => {
+                  // 接口失败时，回退到 config.bio
+                  document.querySelector('#hitokotoText').textContent = "世界美好与莫环环相扣。";
+                  document.querySelector('#hitokotoCursor').style.display = 'none';
+                });
             });
           
             function typeWriter(str) {
