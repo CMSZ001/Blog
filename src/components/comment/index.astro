@@ -16,20 +16,11 @@ const url = `${Astro.site?.href}${path}`
 const comments = data.comments
 
 let commentService = ''
-if (commentConfig?.disqus) {
-  commentService = 'disqus'
-} else if (commentConfig?.giscus) {
-  commentService = 'giscus'
-} else if (commentConfig?.twikoo) {
-  commentService = 'twikoo'
-} else if (commentConfig?.waline) {
+if (commentConfig?.waline) {
   commentService = 'waline'
 }
 ---
 <div class="card-base p-6 mb-4">
-  {commentService === 'disqus' && <Disqus identifier={id} url={url} title={data.title} />}
-  {commentService === 'giscus' && <Giscus />}
-  {commentService === 'twikoo' && <Twikoo path={path} />}
   {commentService === 'waline' && <Waline path={path} />}
   {commentService === '' && null}
 </div>
