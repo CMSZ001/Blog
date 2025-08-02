@@ -88,8 +88,8 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	waline: {
     serverURL: 'https://waline.acmsz.top',
-		dark: 'auto',
-		wordLimit: [2, 300],
+		dark: 'html.dark',
 		login: 'enable',
+		pageview: true,
   }
 }
