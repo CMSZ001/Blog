@@ -4,6 +4,7 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	CommentConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -83,3 +84,30 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
+
+export const commentConfig: CommentConfig = {
+	waline: {
+    serverURL: 'https://waline.acmsz.top',
+    login: 'enable'
+  }
+  // disqus: {
+  //   shortname: 'fuwari',
+  // },
+  // giscus: {
+  //   repo: 'moeyua/fuwari',
+  //   repoId: 'R_kgDOKy9HOQ',
+  //   category: 'General',
+  //   categoryId: 'DIC_kwDOKy9HOc4CegmW',
+  //   mapping: 'title',
+  //   strict: '0',
+  //   reactionsEnabled: '1',
+  //   emitMetadata: '1',
+  //   inputPosition: 'top',
+  //   theme: 'light',
+  //   lang: 'zh-CN',
+  //   loading: 'lazy',
+  // },
+  // twikoo: {
+  //   envId: 'https://twikoo-tau-flame.vercel.app',
+  // },
+}

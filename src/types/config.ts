@@ -84,6 +84,7 @@ export type BlogPostData = {
 	prevTitle?: string;
 	prevSlug?: string;
 	pinned?: boolean;
+	comments?: boolean;
 	nextTitle?: string;
 	nextSlug?: string;
 };
@@ -91,3 +92,12 @@ export type BlogPostData = {
 export type ExpressiveCodeConfig = {
 	theme: string;
 };
+
+export type CommentConfig = {
+  waline?: WalineConfig
+}
+
+type WalineConfig = {
+  serverURL: string
+  login?: string
+}
