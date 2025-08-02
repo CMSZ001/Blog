@@ -80,7 +80,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             </div>
             <div>|</div>
             <div>
-                <span id={`page-views-${entry.slug}`}>加载中...</span>
+                <span id={"page-views-" + entry.slug}>加载中...</span>
             </div>
             <script is:inline define:vars={{ slug: entry.slug }}>
                 (function () {
