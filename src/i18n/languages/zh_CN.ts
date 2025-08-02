@@ -35,4 +35,8 @@ export const zh_CN: Translation = {
 	[Key.author]: "作者",
 	[Key.publishedAt]: "发布于",
 	[Key.license]: "许可协议",
+
+	[Key.notFound]: "404",
+	[Key.notFoundTitle]: "页面未找到",
+	[Key.returnToTop]: "返回首页",
 };
