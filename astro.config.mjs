@@ -24,7 +24,7 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -105,7 +105,7 @@ export default defineConfig({
       }),
       svelte(),
       sitemap(),
-	],
+    ],
 
   markdown: {
       remarkPlugins: [
@@ -157,7 +157,7 @@ export default defineConfig({
               },
           ],
       ],
-	},
+    },
 
   vite: {
       build: {
@@ -174,7 +174,7 @@ export default defineConfig({
               },
           },
       },
-	},
+    },
 
-  adapter: cloudflare(),
+  adapter: vercel(),
 });
