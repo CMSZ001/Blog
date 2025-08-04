@@ -14,6 +14,7 @@ interface Props {
 	slug?: string;
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
+	hidePageViews?: boolean;
 }
 const {
 	published,
@@ -23,6 +24,7 @@ const {
 	slug,
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
+	hidePageViews = false,
 } = Astro.props;
 const className = Astro.props.class;
 ---
@@ -83,71 +85,73 @@ const className = Astro.props.class;
     </div>
 
     <!-- page views -->
-    <div class="flex items-center">
-        <div class="meta-icon"
-        >
-            <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
-        </div>
-        <div class="flex flex-row flex-nowrap items-center">
-            <span id="page-views-display">加载中...</span>
-        </div>
-        <script is:inline define:vars={{ slug: slug }}>
-            (function () {
-                const umamiConfig = { "enable": true, "baseUrl": "https://umami.acmsz.top", "shareId": "CFirWMQoiIUmgPLm", "timezone": "Asia/Shanghai" };
+    {!hidePageViews && (
+        <div class="flex items-center">
+            <div class="meta-icon"
+            >
+                <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
+            </div>
+            <div class="flex flex-row flex-nowrap items-center">
+                <span id="page-views-display">加载中...</span>
+            </div>
+            <script is:inline define:vars={{ slug: slug }}>
+                (function () {
+                    const umamiConfig = { "enable": true, "baseUrl": "https://umami.acmsz.top", "shareId": "CFirWMQoiIUmgPLm", "timezone": "Asia/Shanghai" };
 
-                // 获取访问量统计
-                async function fetchPageViews() {
-                    if (!umamiConfig.enable) {
-                        return;
-                    }
-
-                    try {
-                        // 第一步：获取网站ID和token
-                        const shareResponse = await fetch(`${umamiConfig.baseUrl}/api/share/${umamiConfig.shareId}`);
-                        if (!shareResponse.ok) {
-                            throw new Error('获取分享信息失败');
+                    // 获取访问量统计
+                    async function fetchPageViews() {
+                        if (!umamiConfig.enable) {
+                            return;
                         }
-                        const shareData = await shareResponse.json();
-                        const { websiteId, token } = shareData;
 
-                        // 第二步：获取统计数据
-                        const currentTimestamp = Date.now();
-                        const statsUrl = `${umamiConfig.baseUrl}/api/websites/${websiteId}/stats?startAt=0&endAt=${currentTimestamp}&unit=hour&timezone=${encodeURIComponent(umamiConfig.timezone)}&url=%2Fposts%2F${slug}%2F&compare=false`;
-
-                        const statsResponse = await fetch(statsUrl, {
-                            headers: {
-                                'x-umami-share-token': token
+                        try {
+                            // 第一步：获取网站ID和token
+                            const shareResponse = await fetch(`${umamiConfig.baseUrl}/api/share/${umamiConfig.shareId}`);
+                            if (!shareResponse.ok) {
+                                throw new Error('获取分享信息失败');
                             }
-                        });
+                            const shareData = await shareResponse.json();
+                            const { websiteId, token } = shareData;
 
-                        if (!statsResponse.ok) {
-                            throw new Error('获取统计数据失败');
-                        }
+                            // 第二步：获取统计数据
+                            const currentTimestamp = Date.now();
+                            const statsUrl = `${umamiConfig.baseUrl}/api/websites/${websiteId}/stats?startAt=0&endAt=${currentTimestamp}&unit=hour&timezone=${encodeURIComponent(umamiConfig.timezone)}&url=%2Fposts%2F${slug}%2F&compare=false`;
 
-                        const statsData = await statsResponse.json();
-                        const pageViews = statsData.pageviews?.value || 0;
-                        const visits = statsData.visits?.value || 0;
+                            const statsResponse = await fetch(statsUrl, {
+                                headers: {
+                                    'x-umami-share-token': token
+                                }
+                            });
 
-                        const displayElement = document.getElementById('page-views-display');
-                        if (displayElement) {
-                            displayElement.textContent = `浏览量 ${pageViews} · 访问数 ${visits}`;
-                        }
-                    } catch (error) {
-                        console.error('Error fetching page views:', error);
-                        const displayElement = document.getElementById('page-views-display');
-                        if (displayElement) {
-                            displayElement.textContent = '统计不可用';
+                            if (!statsResponse.ok) {
+                                throw new Error('获取统计数据失败');
+                            }
+
+                            const statsData = await statsResponse.json();
+                            const pageViews = statsData.pageviews?.value || 0;
+                            const visits = statsData.visits?.value || 0;
+
+                            const displayElement = document.getElementById('page-views-display');
+                            if (displayElement) {
+                                displayElement.textContent = `浏览量 ${pageViews} · 访问数 ${visits}`;
+                            }
+                        } catch (error) {
+                            console.error('Error fetching page views:', error);
+                            const displayElement = document.getElementById('page-views-display');
+                            if (displayElement) {
+                                displayElement.textContent = '统计不可用';
+                            }
                         }
                     }
-                }
 
-                // 页面加载完成后获取统计数据
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', fetchPageViews);
-                } else {
-                    fetchPageViews();
-                }
-            })();
-        </script>
-    </div>
+                    // 页面加载完成后获取统计数据
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', fetchPageViews);
+                    } else {
+                        fetchPageViews();
+                    }
+                })();
+            </script>
+        </div>
+    )}
 </div>
