@@ -38,6 +38,7 @@ export const siteConfig: SiteConfig = {
 		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		// }
 	],
+	officialSite: "https://www.acmsz.top",
 };
 
 export const navBarConfig: NavBarConfig = {
