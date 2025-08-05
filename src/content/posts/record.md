@@ -1,6 +1,6 @@
 ---
-title: record
-published: 2025-07-30
+title: 记录
+published: 1999-01-01
 description: ''
 image: ''
 tags: []
