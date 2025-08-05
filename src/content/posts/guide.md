@@ -9,8 +9,6 @@ draft: false
 lang: ''
 ---
 
-# Astro+Fuwari博客部署教程
-
 ::github{repo="saicaca/fuwari"}
 
 ## 准备的东西
