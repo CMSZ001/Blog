@@ -125,4 +125,4 @@ deno run -A npm:create-fuwari@latest
 
 ---
 
- 📣 恭喜你，你的Astro+Fuwari博客已部署完成
+🎉 恭喜你，你的Astro+Fuwari博客已部署完成
