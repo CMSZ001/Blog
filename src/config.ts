@@ -9,7 +9,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "CMSZ's Blog",
+	title: "CMSZ Blog",
 	subtitle: "写点代码，也写点生活。",
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th', 'vi'
 	themeColor: {
