@@ -26,6 +26,8 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 import vercel from "@astrojs/vercel";
 
+import netlify from "@astrojs/netlify";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.acmsz.top/",
@@ -176,5 +178,5 @@ export default defineConfig({
       },
     },
 
-  adapter: vercel(),
+  adapter: netlify(),
 });
