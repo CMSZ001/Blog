@@ -24,8 +24,6 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
-import vercel from "@astrojs/vercel";
-
 import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
