@@ -10,14 +10,13 @@ const config = {
   el: '#waline',
   path: Astro.props.path,
   dark: 'html.dark',
-  wordLimit: ["2", "300"],
 }
 ---
 <!-- Waline -->
 <div class="relative w-full">
   <div id="waline"></div>
   <link rel="stylesheet" href="https://s4.zstatic.net/npm/@waline/client@v3/dist/waline.css" />
-  <script type="module" is:inline define:vars={{ config }}>
+  <script is:inline type="module" is:inline define:vars={{ config }}>
     import { init } from 'https://s4.zstatic.net/npm/@waline/client@v3/dist/waline.js';
     init(config);
   </script>
