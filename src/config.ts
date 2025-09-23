@@ -46,9 +46,20 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.About,
+		
 		{
-			name: "Umami",
+			name: "赞助",
+			url: "/donate/", // Internal links should not include the base path, as it is automatically added
+			external: false, // Show an external link icon and will open in a new tab
+		},
+		{
+			name: "统计",
 			url: "https://umami.acmsz.top/share/CFirWMQoiIUmgPLm/www.acmsz.top", // Internal links should not include the base path, as it is automatically added
+			external: true, // Show an external link icon and will open in a new tab
+		},
+		{
+			name: "状态",
+			url: "https://status.acmsz.top/", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},
 	],
@@ -94,3 +105,23 @@ export const commentConfig: CommentConfig = {
 		pageview: true,
   }
 }
+
+export const umamiConfig: UmamiConfig = {
+	enable: true,
+	baseUrl: "https://umami.acmsz.top",
+	shareId: "CFirWMQoiIUmgPLm",
+	timezone: "Asia/Shanghai",
+};
+
+export const statsConfig = {
+	viewsText: "浏览",
+	visitsText: "访客",
+	loadingText: "统计加载中...",
+	unavailableText: "统计不可用。请检查是否屏蔽了Umami域名，如AdGuard和AdBlock等插件",
+	getStatsText: (pageViews: number, visits: number) => `${statsConfig.viewsText} ${pageViews} · ${statsConfig.visitsText} ${visits}`,
+};
+
+export const gitHubEditConfig: GitHubEditConfig = {
+	enable: true,
+	baseUrl: "https://github.com/CMSZ001/fuwari/blob/main/src/content/posts",
+};
