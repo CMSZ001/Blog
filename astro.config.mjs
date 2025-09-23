@@ -159,6 +159,7 @@ export default defineConfig({
       ],
       rehypePlugins: [
         [rehypeEmailProtection, { method: "base64" }],
+      ]
     },
 
   vite: {
