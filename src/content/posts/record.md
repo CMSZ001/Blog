@@ -12,3 +12,10 @@ lang: ''
 # 记录
 
 > 仅记录**~~奇怪的~~**
+
+## 图片压缩 Squoosh
+[squoosh.app](https://squoosh.app)
+
+## Termux-zsh
+
+::github{repo="Sohil876/Termux-zsh"}
