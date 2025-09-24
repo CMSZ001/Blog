@@ -31,3 +31,5 @@ venv
 # ide
 .idea
 *.iml
+# Local Netlify folder
+.netlify
