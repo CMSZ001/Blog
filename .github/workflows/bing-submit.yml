@@ -1,0 +1,48 @@
+name: Submit New Posts to Bing
+
+on:
+  push:
+    branches:
+      - main # Or your default branch
+    paths:
+      - 'src/content/posts/**.md'
+
+jobs:
+  submit-to-bing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Fetches the last 2 commits to compare HEAD with the previous commit
+
+      - name: Get new files
+        id: get_new_files
+        run: |
+          # Handle the case where before commit might be all zeroes (initial commit)
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            # For initial commit, get all markdown files in posts directory
+            NEW_FILES=$(find src/content/posts -name "*.md" -type f | sed 's#src/content/posts/##' | jq -R . | jq -s .)
+          else
+            # Get the list of added files in the push
+            NEW_FILES=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.event.after }} | grep '^src/content/posts/.*\.md$' | sed 's#src/content/posts/##' | jq -R . | jq -s .)
+          fi
+
+          echo "New files detected: $NEW_FILES"
+          echo "files=$NEW_FILES" >> $GITHUB_OUTPUT
+
+          # Save to file for debugging
+          echo "$NEW_FILES" > new_files.json
+
+      - name: Show files to be submitted
+        run: |
+          echo "Files that will be submitted:"
+          cat new_files.json
+
+      - name: Trigger Bing Submission Worker
+        if: steps.get_new_files.outputs.files != '[]' && steps.get_new_files.outputs.files != '' && steps.get_new_files.outputs.files != 'null'
+        run: |
+          echo "Sending files to Bing Submission Worker: ${{ steps.get_new_files.outputs.files }}"
+          curl -X POST "${{ secrets.BING_SUBMIT_WORKER_URL }}" \
+          -H "Content-Type: application/json" \
+          -d "{\"files\": ${{ steps.get_new_files.outputs.files }} }"
