@@ -1,6 +1,11 @@
 {
-  "newFileLocation": "root",
-  "newFileFolderPath": "posts",
+  "attachmentFolderPath": "assets/images",
   "newLinkFormat": "relative",
-  "attachmentFolderPath": "assets/images"
+  "useMarkdownLinks": true,
+  "uriCallbacks": false,
+  "showLineNumber": true,
+  "tabSize": 4,
+  "promptDelete": false,
+  "trashOption": "none",
+  "useTab": false
 }
