@@ -4,6 +4,10 @@ import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
+
+const launchDate = new Date("2025-07-30");
+const today = new Date();
+const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
 ---
 
 <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
@@ -17,8 +21,11 @@ const currentYear = new Date().getFullYear();
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        <span> | 已稳定运行 </span>
+        <span class="transition text-[var(--primary)] font-medium">{daysRunning}</span>
+        <span> 天</span>
         <br>
-        本网站由 <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.netlify.com/"><img src="https://img.acmsz.top/Blog/logo/Netlify_logo.svg" alt="Netlify" class="inline-block" height="64" width="64"></a> 部署并提供全球 CDN 边缘网络加速
+        本网站由 <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.netlify.com/"><img src="/favicon/Netlify_logo.svg" alt="Netlify" class="inline-block" height="64" width="64"></a> 部署并提供全球 CDN 边缘网络加速
         <br>
         <a class="transition link text-[var(--primary)] font-medium" href="https://icp.gov.moe/?keyword=20257474" target="_blank">萌ICP备20257474号</a>
     </div>
