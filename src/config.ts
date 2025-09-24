@@ -83,7 +83,7 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/CMSZ001",
 		},
 		{
-			name: "RSS,
+			name: "RSS",
 			icon: "fa6-solid:square-rss",
 			url: "https://www.acmsz.top/rss.xml",
 		},
