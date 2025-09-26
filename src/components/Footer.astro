@@ -28,10 +28,19 @@ const currentYear = new Date().getFullYear();
 </div>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const launchDate = new Date("2025-07-30");
-    const today = new Date();
-    const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
-    document.getElementById("days-running").textContent = daysRunning;
-  });
+  const launchDate = new Date("2025-01-01"); // 改成你网站的上线日期
+  const today = new Date();
+  const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
+  const el = document.getElementById("days-running");
+
+  let current = 0;
+  const duration = 1200; // 动画时长(ms)
+  const stepTime = Math.max(Math.floor(duration / daysRunning), 20);
+  const timer = setInterval(() => {
+    current++;
+    el.textContent = current;
+    if (current >= daysRunning) {
+      clearInterval(timer);
+    }
+  }, stepTime);
 </script>
