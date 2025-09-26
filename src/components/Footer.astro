@@ -4,10 +4,6 @@ import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
-
-const launchDate = new Date("2025-07-30");
-const today = new Date();
-const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
 ---
 
 <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
@@ -32,8 +28,10 @@ const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
 </div>
 
 <script is:inline>
-    const launchDate = new Date("2025-01-01"); // 修改为你网站实际的上线日期
+  document.addEventListener("DOMContentLoaded", () => {
+    const launchDate = new Date("2025-07-30");
     const today = new Date();
     const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
     document.getElementById("days-running").textContent = daysRunning;
+  });
 </script>
