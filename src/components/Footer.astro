@@ -17,9 +17,7 @@ const currentYear = new Date().getFullYear();
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
-        <span> | 已稳定运行 </span>
-        <span id="days-running" class="transition text-[var(--primary)] font-medium"></span>
-        <span> 天</span>
+         | 本站已运行 <span id="running-days" class="transition text-[var(--primary)] font-medium"></span> 天
         <br>
         本网站由 <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.netlify.com/"><img src="/favicon/Netlify_logo.svg" alt="Netlify" class="inline-block" height="64" width="64"></a> 部署并提供全球 CDN 边缘网络加速
         <br>
@@ -28,19 +26,12 @@ const currentYear = new Date().getFullYear();
 </div>
 
 <script is:inline>
-  const launchDate = new Date("2025-01-01"); // 改成你网站的上线日期
-  const today = new Date();
-  const daysRunning = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
-  const el = document.getElementById("days-running");
-
-  let current = 0;
-  const duration = 1200; // 动画时长(ms)
-  const stepTime = Math.max(Math.floor(duration / daysRunning), 20);
-  const timer = setInterval(() => {
-    current++;
-    el.textContent = current;
-    if (current >= daysRunning) {
-      clearInterval(timer);
-    }
-  }, stepTime);
+  (() => {
+    const launchDate = new Date("2025-07-30"); // 修改为你的网站真实上线日期
+    const now = new Date();
+    const diffTime = now.getTime() - launchDate.getTime();
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const el = document.getElementById("running-days");
+    if (el) el.textContent = days;
+  })();
 </script>
