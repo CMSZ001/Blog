@@ -113,13 +113,13 @@ deno run -A npm:create-fuwari@latest
 
 2. 打开[Vercel](https://vercel.com/dashboard)并创建项目
 
-![1](https://img.acmsz.top/Blog/favicon/1.jpg)
+![](../assets/images/b86379aa-d295-49b1-87e9-c9930c24ae27.webp)
 
-![PixPin_2025-08-05_16-05-26.png](https://img.acmsz.top/Blog/favicon/2.jpg)
+![](../assets/images/d4ab4262-d45c-4e6a-9646-6c2af0515082.webp)
 
-2. 构建静态页面
+3. 构建静态页面
    
-   ![PixPin_2025-08-05_16-09-58.gif](https://img.acmsz.top/Blog/favicon/3.gif)
+![](../assets/images/ce4482bc-c151-4ace-8187-f72cffc00660.gif)
 
 ---
 
