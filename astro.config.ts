@@ -10,18 +10,32 @@ import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
-import rehypeCallouts from "rehype-callouts";
-import {
-  transformerNotationDiff,
-  transformerNotationHighlight,
-  transformerNotationWordHighlight,
-} from "@shikijs/transformers";
-import { transformerFileName } from "./src/utils/transformers/fileName";
+import expressiveCode from "astro-expressive-code";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import config from "./astro-paper.config";
+import rehypeExternalLinks from "rehype-external-links";
+import remarkDirective from "remark-directive";
+import remarkCalloutDirectives from "@microflash/remark-callout-directives";
+import githubCalloutOptions from "@microflash/remark-callout-directives/config/github";
 
 export default defineConfig({
   site: config.site.url,
+  prefetch: {
+    prefetchAll: true,
+  },
   integrations: [
+    expressiveCode({
+      themes: ["github-light", "github-dark"],
+      themeCssSelector: theme =>
+        `[data-theme="${theme.name === "github-dark" ? "dark" : "light"}"]`,
+      useDarkModeMediaQuery: false,
+      plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
+      styleOverrides: {
+        uiFontFamily: "var(--font-app)",
+        codeFontFamily: "var(--font-code)",
+      },
+    }),
     mdx(),
     sitemap({
       filter: page =>
@@ -29,8 +43,8 @@ export default defineConfig({
     }),
   ],
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ["en", "zh-CN"],
+    defaultLocale: "zh-CN",
     routing: {
       prefixDefaultLocale: false,
     },
@@ -38,35 +52,69 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [
-        remarkToc,
-        [remarkCollapse, { test: "Table of contents" }],
+        remarkDirective,
+        [remarkCalloutDirectives, githubCalloutOptions],
+        [
+          remarkToc,
+          {
+            heading: "(Table of contents|目录)",
+          },
+        ],
+        [
+          remarkCollapse,
+          { test: /^(Table of contents|目录)$/i, summary: () => "点击展开" },
+        ],
       ],
-      rehypePlugins: [rehypeCallouts],
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+          },
+        ],
+      ],
     }),
-    shikiConfig: {
-      themes: { light: "min-light", dark: "night-owl" },
-      defaultColor: false,
-      wrap: false,
-      transformers: [
-        transformerFileName({ style: "v2", hideDot: false }),
-        transformerNotationHighlight(),
-        transformerNotationWordHighlight(),
-        transformerNotationDiff({ matchAlgorithm: "v3" }),
-      ],
-    },
   },
   vite: {
     plugins: [tailwindcss()],
   },
   fonts: [
     {
-      name: "Google Sans Code",
-      cssVariable: "--font-google-sans-code",
+      name: "Inter",
+      cssVariable: "--font-inter",
       provider: fontProviders.google(),
-      fallbacks: ["monospace"],
+      fallbacks: [],
+      // optimizedFallbacks: false,
       weights: [300, 400, 500, 600, 700],
       styles: ["normal", "italic"],
-      formats: ["woff", "ttf"],
+    },
+    {
+      name: "MiSans",
+      provider: fontProviders.local(),
+      cssVariable: "--font-misans",
+      options: {
+        variants: [
+          {
+            weight: "400",
+            style: "normal",
+            src: ["./src/assets/fonts/MiSans/MiSans-Regular.otf"],
+          },
+          {
+            weight: "700",
+            style: "normal",
+            src: ["./src/assets/fonts/MiSans/MiSans-Bold.otf"],
+          },
+        ],
+      },
+    },
+    {
+      name: "Cascadia Code",
+      provider: fontProviders.google(),
+      cssVariable: "--font-cascadia-code",
+      styles: ["normal"],
+      optimizedFallbacks: false,
+      fallbacks: [],
+      featureSettings: '"liga" 1',
     },
   ],
   env: {

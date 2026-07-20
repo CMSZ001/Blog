@@ -10,6 +10,7 @@ export interface UIStrings {
   post: {
     publishedAt: string;
     updatedAt: string;
+    tableOfContents: string;
     sharePostIntro: string;
     sharePostOn: string;
     sharePostViaEmail: string;

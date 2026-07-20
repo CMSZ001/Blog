@@ -74,10 +74,6 @@
       @apply bg-muted/75 text-foreground rounded p-1 wrap-break-word before:content-none after:content-none;
     }
 
-    .astro-code code {
-      @apply flex-[1_0_100%] bg-inherit p-0;
-    }
-
     blockquote {
       @apply border-s-accent/80 wrap-break-word opacity-80;
     }
@@ -95,29 +91,98 @@
     }
   }
 
-  /* ===== Code Blocks & Syntax Highlighting ===== */
-  .astro-code {
-    @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
+  /* ===== Code Blocks ===== */
+  .app-prose .expressive-code {
+    @apply my-6;
   }
 
-  html[data-theme="dark"] .astro-code {
-    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+  .callout {
+    --calloutAccent: var(--callout-accent, var(--github-callout-accent-note));
+    --calloutBorder: var(--callout-border, var(--github-callout-border-note));
+
+    border-left: 0px solid var(--calloutBorder);
+    border-inline-start: 0.25em solid var(--calloutBorder);
+    padding: 0.5rem 1rem;
+    margin: 16px;
+    color: inherit;
   }
 
-  /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
-  .astro-code {
-    .line.diff.add {
-      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
-    }
-    .line.diff.remove {
-      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
-    }
-    .line.highlighted {
-      @apply inline-block w-full bg-slate-400/20;
-    }
-    .highlighted-word {
-      @apply border-border rounded-sm border px-0.5 py-px;
-    }
+  details.callout summary::marker {
+    color: var(--calloutAccent);
+  }
+
+  .callout-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--calloutAccent);
+  }
+
+  summary > .callout-indicator {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+  .callout-indicator + * {
+    margin-top: 1rem;
+    margin-block-start: 1rem;
+  }
+
+  .callout-title {
+    font-weight: var(--github-callout-header-font-weight, 500);
+  }
+
+  .callout-hint {
+    display: flex;
+    align-items: center;
+  }
+
+  .callout-hint > svg {
+    fill: currentColor;
+  }
+
+  .callout-content > * {
+    margin: 1em 0;
+  }
+
+  .callout-content > *:first-child {
+    margin-top: 0;
+  }
+
+  .callout-content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout-content:first-child,
+  .callout-content:only-child {
+    margin-top: 0;
+    margin-block-start: 0;
+  }
+
+  .callout-content:last-child,
+  .callout-content:only-child {
+    margin-bottom: 0;
+    margin-block-end: 0;
+  }
+
+  .callout-note {
+    --callout-accent: var(--github-callout-accent-note);
+    --callout-border: var(--github-callout-border-note);
+  }
+  .callout-commend {
+    --callout-accent: var(--github-callout-accent-tip);
+    --callout-border: var(--github-callout-border-tip);
+  }
+  .callout-warn {
+    --callout-accent: var(--github-callout-accent-warning);
+    --callout-border: var(--github-callout-border-warning);
+  }
+  .callout-deter {
+    --callout-accent: var(--github-callout-accent-caution);
+    --callout-border: var(--github-callout-border-caution);
+  }
+  .callout-assert {
+    --callout-accent: var(--github-callout-accent-important);
+    --callout-border: var(--github-callout-border-important);
   }
 }

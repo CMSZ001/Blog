@@ -7,7 +7,15 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-google-sans-code);
+  --font-app:
+    var(--font-inter), -apple-system, BlinkMacSystemFont, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "PingFang SC",
+    HarmonyOS_Regular, "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Helvetica, "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei",
+    Arial, sans-serif;
+  --font-code:
+    var(--font-cascadia-code), JetBrainsMono, "Source Code Pro", Monaco, Menlo,
+    Consolas, "Courier New", Courier, monospace;
 }
 
 /* Light theme values */
@@ -20,15 +28,39 @@
   --muted: #e6e6e6;
   --muted-foreground: #6b7280;
   --border: #ece9e9;
+
+  --github-callout-accent-note: #0969da;
+  --github-callout-accent-tip: #1a7f37;
+  --github-callout-accent-important: #8250df;
+  --github-callout-accent-warning: #9a6700;
+  --github-callout-accent-caution: #d1242f;
+
+  --github-callout-border-note: #0969da;
+  --github-callout-border-tip: #1a7f37;
+  --github-callout-border-important: #8250df;
+  --github-callout-border-warning: #9a6700;
+  --github-callout-border-caution: #cf222e;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --background: #2f3741;
+  --foreground: #e6e6e6;
+  --accent: #1ad9d9;
+  --accent-foreground: #0d2b2b;
+  --muted: #596b81;
+  --muted-foreground: #8faabb;
+  --border: #3b4655;
+
+  --github-callout-accent-note: #4493f8;
+  --github-callout-accent-tip: #3fb950;
+  --github-callout-accent-important: #ab7df8;
+  --github-callout-accent-warning: #d29922;
+  --github-callout-accent-caution: #f85149;
+
+  --github-callout-border-note: #1f6feb;
+  --github-callout-border-tip: #238636;
+  --github-callout-border-important: #8957e5;
+  --github-callout-border-warning: #9e6a03;
+  --github-callout-border-caution: #da3633;
 }
