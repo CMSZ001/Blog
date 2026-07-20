@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import { Font } from "astro:assets";
 import config from "@/config";
 
 type Props = {
@@ -60,6 +61,8 @@ const structuredData = {
       is:inline
       set:html={JSON.stringify(structuredData)}
     />
+
+    <Font cssVariable="--font-cascadia-code" preload />
   </Fragment>
 
   <slot />
