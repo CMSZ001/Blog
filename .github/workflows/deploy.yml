@@ -1,0 +1,44 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: "☁️ 检出代码"
+        uses: actions/checkout@v4
+
+      - name: "📦 安装 pnpm"
+        uses: pnpm/action-setup@v4
+        with:
+          version: "11.3.0"
+
+      - name: "🔧 设置 Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: "📦 安装依赖"
+        run: pnpm install --frozen-lockfile
+
+      - name: "🚀 构建"
+        run: pnpm run build
+
+      - name: "📤 部署到 Cloudflare Workers"
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
