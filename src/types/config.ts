@@ -92,6 +92,13 @@ interface ShareLink {
   linkTitle?: string;
 }
 
+interface LicenseConfig {
+  /** License URL, e.g. "https://creativecommons.org/licenses/by-nc-sa/4.0/" */
+  url: string;
+  /** License display name, e.g. "CC BY-NC-SA 4.0" */
+  name: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
@@ -100,6 +107,8 @@ interface AstroPaperConfig {
   socials?: SocialLink[];
   /** Share links shown on post detail pages */
   shareLinks?: ShareLink[];
+  /** License info shown on post detail pages */
+  license?: LicenseConfig;
 }
 
 type ResolvedSiteConfig = Required<
@@ -123,6 +132,7 @@ export interface ResolvedAstroPaperConfig {
   features: Required<FeaturesConfig>;
   socials: SocialLink[];
   shareLinks: ShareLink[];
+  license: LicenseConfig;
 }
 
 /**

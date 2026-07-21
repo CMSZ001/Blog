@@ -17,6 +17,8 @@ export default {
     sharePostOn: "在 {{platform}} 上分享",
     sharePostViaEmail: "通过邮件分享",
     tagLabel: "标签",
+    author: "作者",
+    license: "版权协议",
     backToTop: "返回顶部",
     goBack: "返回",
     editPage: "编辑页面",

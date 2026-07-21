@@ -29,10 +29,11 @@ export default defineAstroPaperConfig({
     search: "pagefind",
   },
   socials: [
-    { name: "github",   url: "https://github.com/CMSZ0001/", linkTitle: "Github" },
+    { name: "github", url: "https://github.com/CMSZ0001/", linkTitle: "Github" },
+    { name: "ifdian", url: "https://www.ifdian.net/a/acmsz", linkTitle: "爱发电" },
     // { name: "x",        url: "https://x.com/username" },
     // { name: "linkedin", url: "https://www.linkedin.com/in/username/" },
-    { name: "mail",     url: "mailto:me@acmsz.top" , linkTitle: "Email" },
+    { name: "mail",     url: "mailto:me@acmsz.top" , linkTitle: "邮箱" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },
@@ -42,4 +43,8 @@ export default defineAstroPaperConfig({
     { name: "pinterest", url: "https://pinterest.com/pin/create/button/?url=" },
     { name: "mail",     url: "mailto:?subject=See%20this%20post&body=" },
   ],
+  license: {
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    name: "CC BY-NC-SA 4.0",
+  },
 });
