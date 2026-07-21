@@ -1,0 +1,61 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import config from "@/config";
+import { useTranslations } from "@/i18n";
+import IconCreativeCommons from "@/assets/icons/IconCreativeCommons.svg";
+import LinkButton from "./LinkButton.astro";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+interface Props {
+  title: string;
+  url: string;
+  pubDatetime: string | Date;
+  timezone?: string;
+}
+
+const { title, url, pubDatetime, timezone: postTimezone } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+
+const date = dayjs(pubDatetime)
+  .tz(postTimezone ?? config.site.timezone)
+  .format("YYYY/MM/DD");
+
+const { url: licenseUrl, name: licenseName } = config.license;
+---
+
+<div
+  class="relative overflow-hidden rounded-lg bg-muted/50 px-6 py-5 transition"
+>
+  <div class="text-foreground/85 text-sm font-semibold">{title}</div>
+  <LinkButton href={url} class="text-foreground break-all text-sm underline decoration-dashed underline-offset-4">{url}</LinkButton>
+  <div class="mt-2 flex flex-wrap gap-x-6 gap-y-1">
+    <div>
+      <div class="text-foreground/80 text-xs">{t.post.author}</div>
+      <div class="text-foreground/85 text-sm">{config.site.author}</div>
+    </div>
+    <div>
+      <div class="text-foreground/80 text-xs">{t.post.publishedAt}</div>
+      <div class="text-foreground/85 text-sm">{date}</div>
+    </div>
+    <div>
+      <div class="text-foreground/80 text-xs">{t.post.license}</div>
+      <LinkButton
+        href={licenseUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-foreground text-sm underline decoration-dashed underline-offset-4"
+      >
+        {licenseName}
+      </LinkButton>
+    </div>
+  </div>
+
+  <IconCreativeCommons
+    class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-accent/10 dark:text-accent/5 size-48"
+    aria-hidden="true"
+  />
+</div>
