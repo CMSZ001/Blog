@@ -2,3 +2,5 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+patchedDependencies:
+  artalk@2.9.1: patches/artalk@2.9.1.patch

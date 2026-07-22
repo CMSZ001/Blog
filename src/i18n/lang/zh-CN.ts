@@ -37,7 +37,6 @@ export default {
     allPosts: "所有文章",
   },
   footer: {
-    copyright: "版权声明",
     allRightsReserved: "保留所有权利。",
   },
   pages: {
