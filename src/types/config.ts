@@ -99,6 +99,16 @@ interface LicenseConfig {
   name: string;
 }
 
+interface ArtalkConfig extends Partial<import("artalk").ArtalkConfig> {}
+
+interface CommentsConfig {
+  /** Enable comment system globally */
+  enable: boolean;
+  provider: "artalk";
+  /** Artalk-specific config */
+  artalk: ArtalkConfig;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
@@ -109,6 +119,8 @@ interface AstroPaperConfig {
   shareLinks?: ShareLink[];
   /** License info shown on post detail pages */
   license?: LicenseConfig;
+  /** Comment system config */
+  comments?: CommentsConfig;
 }
 
 type ResolvedSiteConfig = Required<
@@ -133,6 +145,7 @@ export interface ResolvedAstroPaperConfig {
   socials: SocialLink[];
   shareLinks: ShareLink[];
   license: LicenseConfig;
+  comments: CommentsConfig | null;
 }
 
 /**

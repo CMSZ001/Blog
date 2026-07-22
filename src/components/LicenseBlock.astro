@@ -43,14 +43,15 @@ const { url: licenseUrl, name: licenseName } = config.license;
     </div>
     <div>
       <div class="text-foreground/80 text-xs">{t.post.license}</div>
-      <LinkButton
-        href={licenseUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-foreground text-sm underline decoration-dashed underline-offset-4"
-      >
-        {licenseName}
-      </LinkButton>
+      <div class="text-foreground text-sm underline decoration-dashed underline-offset-4">
+        <LinkButton
+          href={licenseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {licenseName}
+        </LinkButton>
+      </div>
     </div>
   </div>
 

@@ -1,0 +1,193 @@
+---
+import config from "@/config";
+
+export interface Props {
+  pageKey: string;
+  pageTitle: string;
+}
+
+const { pageKey, pageTitle } = Astro.props;
+
+const artalkOpts = {
+  ...(config.comments?.artalk ?? {}),
+};
+
+// Preconnect to Artalk image server for faster LCP
+const artalkServer = config.comments?.artalk?.server;
+let artalkOrigin: string | null = null;
+try { artalkOrigin = artalkServer ? new URL(artalkServer).origin : null; } catch { /* ignore invalid URL */ }
+
+// Preconnect to avatar server (gravatar/weavatar)
+const avatarMirror = config.comments?.artalk?.gravatar?.mirror;
+let avatarOrigin: string | null = null;
+try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch { /* ignore invalid URL */ }
+---
+
+{
+  artalkOrigin && (
+    <link rel="preconnect" href={artalkOrigin} />
+  )
+}{
+  avatarOrigin && (
+    <link rel="preconnect" href={avatarOrigin} />
+  )
+}
+
+<div
+  id="artalk"
+  data-opts={JSON.stringify(artalkOpts)}
+  data-page-key={pageKey}
+  data-page-title={pageTitle}
+></div>
+
+<style is:global>
+  #artalk {
+    margin-bottom: 24px;
+    --at-color-bg: var(--background);
+    --at-color-bg-transl: var(--background);
+    --at-color-bg-grey: var(--muted);
+    --at-color-bg-grey-transl: var(--muted);
+    --at-color-font: var(--foreground);
+    --at-color-border: var(--border);
+    --at-color-main: var(--accent);
+    --at-color-sub: var(--accent-foreground);
+    --at-color-grey: var(--foreground);
+    --at-color-meta: var(--muted-foreground);
+    --at-color-deep: var(--accent);
+
+    /* color-mix() enhancements — ignored by unsupported browsers, fallback above applies */
+    --at-color-bg-transl: color-mix(in srgb, var(--background) 85%, transparent);
+    --at-color-bg-grey-transl: color-mix(in srgb, var(--muted) 50%, transparent);
+    --at-color-main: color-mix(in srgb, var(--accent) 85%, var(--background));
+    --at-color-grey: color-mix(in srgb, var(--foreground) 65%, var(--muted-foreground) 35%);
+    --at-color-meta: color-mix(in srgb, var(--foreground) 55%, var(--muted-foreground) 45%);
+    --at-color-deep: color-mix(in srgb, var(--accent) 70%, var(--foreground) 30%);
+
+    .atk-send-btn { color: #fff; }
+
+    .atk-region-badge,
+    .ua-browser,
+    .ua-os { color: var(--foreground); }
+
+    .atk-badge {
+      color: #fff;
+
+      &[style*="background"] { background-color: rgb(0, 85, 170) !important; }
+    }
+  }
+
+  [data-theme="dark"] #artalk {
+    --at-color-main: var(--accent);
+
+    --at-color-main: color-mix(in srgb, var(--accent) 70%, var(--foreground) 30%);
+
+    .atk-send-btn {
+      background: var(--accent);
+      background: color-mix(in srgb, var(--accent) 30%, var(--background) 70%);
+    }
+
+    .atk-region-badge,
+    .ua-browser,
+    .ua-os { color: #fff; }
+  }
+</style>
+
+<script>
+  import type ArtalkType from "artalk";
+  import type { ArtalkConfig } from "artalk";
+
+  let prevArtalk: ArtalkType | null = null;
+  let darkModeObserver: MutationObserver | null = null;
+  let darkModeTimeout: number | null = null;
+  let scrollObserver: IntersectionObserver | null = null;
+  let artalkInitState: "idle" | "initializing" | "initialized" = "idle";
+
+  // Fix server-rendered ARIA issues (sidebar iframe)
+  function fixServerAria() {
+    document.querySelectorAll(".atk-logout[aria-label]:not([role])").forEach(el => {
+      el.setAttribute("role", "button");
+    });
+  }
+
+  fixServerAria();
+
+  function disposeArtalk() {
+    prevArtalk?.destroy();
+    prevArtalk = null;
+    scrollObserver?.disconnect();
+    scrollObserver = null;
+    darkModeObserver?.disconnect();
+    darkModeObserver = null;
+    if (darkModeTimeout !== null) clearTimeout(darkModeTimeout);
+    darkModeTimeout = null;
+    artalkInitState = "idle";
+  }
+
+  function loadArtalk() {
+    const el = document.getElementById("artalk");
+    if (!el) return;
+
+    let opts: Partial<ArtalkConfig> = {};
+    try {
+      opts = JSON.parse(el.dataset.opts ?? "{}") as Partial<ArtalkConfig>;
+    } catch {
+      console.error("[Artalk] Failed to parse data-opts, using default config");
+    }
+
+    scrollObserver = new IntersectionObserver(
+      async entries => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          scrollObserver?.disconnect();
+          if (artalkInitState !== "idle") return;
+          artalkInitState = "initializing";
+
+          try {
+            const results: any = await Promise.all([
+              import("artalk"),
+              import("artalk/dist/Artalk.css"),
+            ]);
+            const Artalk = results[0].default;
+
+            if (artalkInitState !== "initializing") return;
+            const isDark = document.documentElement.dataset.theme === "dark";
+            const artalk = Artalk.init({
+              el,
+              ...opts,
+              darkMode: isDark,
+              pageKey: el.dataset.pageKey,
+              pageTitle: el.dataset.pageTitle,
+            });
+
+            artalkInitState = "initialized";
+
+            // Sync dark mode when theme toggles (debounced)
+            darkModeObserver = new MutationObserver(() => {
+              if (darkModeTimeout !== null) clearTimeout(darkModeTimeout);
+              darkModeTimeout = window.setTimeout(() => {
+                artalk.setDarkMode(document.documentElement.dataset.theme === "dark");
+                darkModeTimeout = null;
+              }, 50);
+            });
+            darkModeObserver.observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ["data-theme"],
+            });
+
+            prevArtalk = artalk;
+          } catch (e) {
+            console.error("[Artalk] Failed to load modules, will retry on next scroll", e);
+            artalkInitState = "idle";
+          }
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    scrollObserver.observe(el);
+  }
+
+  document.addEventListener("astro:before-swap", disposeArtalk);
+  document.addEventListener("astro:page-load", loadArtalk);
+  loadArtalk();
+</script>
