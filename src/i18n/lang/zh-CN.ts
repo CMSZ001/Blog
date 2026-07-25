@@ -24,6 +24,7 @@ export default {
     editPage: "编辑页面",
     previousPost: "上一篇",
     nextPost: "下一篇",
+    readingTime: "需要 {{minutes}} 分钟阅读",
   },
   pagination: {
     prev: "上一页",

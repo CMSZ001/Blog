@@ -6,7 +6,7 @@ export default defineAstroPaperConfig({
     title: "CMSZ's Blog",
     description: "CMSZ 的个人博客，分享技术心得、开发经验与生活记录。",
     author: "CMSZ",
-    // profile: "https://blog.acmsz.top",
+    profile: undefined,
     ogImage: "default-og.jpg",
     lang: "zh-CN",
     timezone: "Asia/Shanghai",

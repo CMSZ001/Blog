@@ -18,6 +18,8 @@ import rehypeExternalLinks from "rehype-external-links";
 import remarkDirective from "remark-directive";
 import remarkCalloutDirectives from "@microflash/remark-callout-directives";
 import githubCalloutOptions from "@microflash/remark-callout-directives/config/github";
+import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
+import { remarkModifiedTime } from './src/plugins/remark-modified-time.mjs';
 
 export default defineConfig({
   site: config.site.url,
@@ -64,6 +66,8 @@ export default defineConfig({
           remarkCollapse,
           { test: /^(Table of contents|目录)$/i, summary: () => "点击展开" },
         ],
+        remarkReadingTime,
+        remarkModifiedTime
       ],
       rehypePlugins: [
         [

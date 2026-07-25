@@ -15,9 +15,10 @@ interface Props {
   url: string;
   pubDatetime: string | Date;
   timezone?: string;
+  author: string;
 }
 
-const { title, url, pubDatetime, timezone: postTimezone } = Astro.props;
+const { title, url, pubDatetime, timezone: postTimezone, author } = Astro.props;
 const t = useTranslations(Astro.currentLocale);
 
 const date = dayjs(pubDatetime)
@@ -35,7 +36,7 @@ const { url: licenseUrl, name: licenseName } = config.license;
   <div class="mt-2 flex flex-wrap gap-x-6 gap-y-1">
     <div>
       <div class="text-foreground/80 text-xs">{t.post.author}</div>
-      <div class="text-foreground/85 text-sm">{config.site.author}</div>
+      <div class="text-foreground/85 text-sm">{author}</div>
     </div>
     <div>
       <div class="text-foreground/80 text-xs">{t.post.publishedAt}</div>
