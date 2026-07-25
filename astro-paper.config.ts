@@ -29,7 +29,7 @@ export default defineAstroPaperConfig({
     search: "pagefind",
   },
   socials: [
-    { name: "github", url: "https://github.com/CMSZ0001/", linkTitle: "Github" },
+    { name: "github", url: "https://github.com/CMSZ001/", linkTitle: "Github" },
     { name: "ifdian", url: "https://www.ifdian.net/a/acmsz", linkTitle: "爱发电" },
     // { name: "x",        url: "https://x.com/username" },
     // { name: "linkedin", url: "https://www.linkedin.com/in/username/" },
