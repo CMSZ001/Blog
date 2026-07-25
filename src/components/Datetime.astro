@@ -14,7 +14,7 @@ type Props = {
   size?: "sm" | "lg";
   pubDatetime: string | Date;
   timezone?: string;
-  modDatetime?: string | Date | null;
+  modDatetime?: string | Date | undefined;
 };
 
 const {
@@ -33,7 +33,7 @@ const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
   postTimezone ?? config.site.timezone
 );
 
-const date = datetime.format("YYYY/MM/DD");
+const date = datetime.format("YYYY/MM/DD HH:mm");
 ---
 
 <div
