@@ -3,4 +3,4 @@ allowBuilds:
   sharp: true
   workerd: true
 patchedDependencies:
-  artalk@2.9.1: patches/artalk@2.9.1.patch
+  artalk@2.10.0: patches/artalk@2.10.0.patch
