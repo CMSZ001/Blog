@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://blog.acmsz.top/",
+    url: "https://acmsz.top/",
     title: "CMSZ's Blog",
     description: "CMSZ 的个人博客，分享技术心得、开发经验与生活记录。",
     author: "CMSZ",

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && rm -f dist/_astro/fonts/*.otf && pagefind --site dist && cp -r dist/pagefind public/",
+    "build": "astro check && astro build && rm -f dist/_astro/fonts/*.otf && pagefind --site dist && cp -r dist/pagefind public/ && cp _headers.txt dist/_headers",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
