@@ -15,22 +15,24 @@ const artalkOpts = {
 // Preconnect to Artalk image server for faster LCP
 const artalkServer = config.comments?.artalk?.server;
 let artalkOrigin: string | null = null;
-try { artalkOrigin = artalkServer ? new URL(artalkServer).origin : null; } catch { /* ignore invalid URL */ }
+try {
+  artalkOrigin = artalkServer ? new URL(artalkServer).origin : null;
+} catch {
+  /* ignore invalid URL */
+}
 
 // Preconnect to avatar server (gravatar/weavatar)
 const avatarMirror = config.comments?.artalk?.gravatar?.mirror;
 let avatarOrigin: string | null = null;
-try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch { /* ignore invalid URL */ }
+try {
+  avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null;
+} catch {
+  /* ignore invalid URL */
+}
 ---
 
-{
-  artalkOrigin && (
-    <link rel="preconnect" href={artalkOrigin} />
-  )
-}{
-  avatarOrigin && (
-    <link rel="preconnect" href={avatarOrigin} />
-  )
+{artalkOrigin && <link rel="preconnect" href={artalkOrigin} />}{
+  avatarOrigin && <link rel="preconnect" href={avatarOrigin} />
 }
 
 <div
@@ -38,7 +40,8 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
   data-opts={JSON.stringify(artalkOpts)}
   data-page-key={pageKey}
   data-page-title={pageTitle}
-></div>
+>
+</div>
 
 <style is:global>
   #artalk {
@@ -56,30 +59,60 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
     --at-color-deep: var(--accent);
 
     /* color-mix() enhancements — ignored by unsupported browsers, fallback above applies */
-    --at-color-bg-transl: color-mix(in srgb, var(--background) 85%, transparent);
-    --at-color-bg-grey-transl: color-mix(in srgb, var(--muted) 50%, transparent);
+    --at-color-bg-transl: color-mix(
+      in srgb,
+      var(--background) 85%,
+      transparent
+    );
+    --at-color-bg-grey-transl: color-mix(
+      in srgb,
+      var(--muted) 50%,
+      transparent
+    );
     --at-color-main: color-mix(in srgb, var(--accent) 85%, var(--background));
-    --at-color-grey: color-mix(in srgb, var(--foreground) 65%, var(--muted-foreground) 35%);
-    --at-color-meta: color-mix(in srgb, var(--foreground) 55%, var(--muted-foreground) 45%);
-    --at-color-deep: color-mix(in srgb, var(--accent) 70%, var(--foreground) 30%);
+    --at-color-grey: color-mix(
+      in srgb,
+      var(--foreground) 65%,
+      var(--muted-foreground) 35%
+    );
+    --at-color-meta: color-mix(
+      in srgb,
+      var(--foreground) 55%,
+      var(--muted-foreground) 45%
+    );
+    --at-color-deep: color-mix(
+      in srgb,
+      var(--accent) 70%,
+      var(--foreground) 30%
+    );
 
-    .atk-send-btn { color: #fff; }
+    .atk-send-btn {
+      color: #fff;
+    }
 
     .atk-region-badge,
     .ua-browser,
-    .ua-os { color: var(--foreground); }
+    .ua-os {
+      color: var(--foreground);
+    }
 
     .atk-badge {
       color: #fff;
 
-      &[style*="background"] { background-color: rgb(0, 85, 170) !important; }
+      &[style*="background"] {
+        background-color: rgb(0, 85, 170) !important;
+      }
     }
   }
 
   [data-theme="dark"] #artalk {
     --at-color-main: var(--accent);
 
-    --at-color-main: color-mix(in srgb, var(--accent) 70%, var(--foreground) 30%);
+    --at-color-main: color-mix(
+      in srgb,
+      var(--accent) 70%,
+      var(--foreground) 30%
+    );
 
     .atk-send-btn {
       background: var(--accent);
@@ -88,7 +121,9 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
 
     .atk-region-badge,
     .ua-browser,
-    .ua-os { color: #fff; }
+    .ua-os {
+      color: #fff;
+    }
   }
 </style>
 
@@ -104,9 +139,11 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
 
   // Fix server-rendered ARIA issues (sidebar iframe)
   function fixServerAria() {
-    document.querySelectorAll(".atk-logout[aria-label]:not([role])").forEach(el => {
-      el.setAttribute("role", "button");
-    });
+    document
+      .querySelectorAll(".atk-logout[aria-label]:not([role])")
+      .forEach(el => {
+        el.setAttribute("role", "button");
+      });
   }
 
   fixServerAria();
@@ -131,7 +168,7 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
     try {
       opts = JSON.parse(el.dataset.opts ?? "{}") as Partial<ArtalkConfig>;
     } catch {
-      console.error("[Artalk] Failed to parse data-opts, using default config");
+      console.error("[Artalk] Failed to parse data-opts, using default config"); // eslint-disable-line no-console
     }
 
     scrollObserver = new IntersectionObserver(
@@ -165,7 +202,9 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
             darkModeObserver = new MutationObserver(() => {
               if (darkModeTimeout !== null) clearTimeout(darkModeTimeout);
               darkModeTimeout = window.setTimeout(() => {
-                artalk.setDarkMode(document.documentElement.dataset.theme === "dark");
+                artalk.setDarkMode(
+                  document.documentElement.dataset.theme === "dark"
+                );
                 darkModeTimeout = null;
               }, 50);
             });
@@ -176,7 +215,11 @@ try { avatarOrigin = avatarMirror ? new URL(avatarMirror).origin : null; } catch
 
             prevArtalk = artalk;
           } catch (e) {
-            console.error("[Artalk] Failed to load modules, will retry on next scroll", e);
+            // eslint-disable-next-line no-console
+            console.error(
+              "[Artalk] Failed to load modules, will retry on next scroll",
+              e
+            );
             artalkInitState = "idle";
           }
         }

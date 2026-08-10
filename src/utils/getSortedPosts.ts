@@ -12,11 +12,7 @@ export function getSortedPosts(posts: CollectionEntry<"posts">[]) {
     .filter(postFilter)
     .sort(
       (a, b) =>
-        Math.floor(
-          new Date(b.data.pubDatetime).getTime() / 1000
-        ) -
-        Math.floor(
-          new Date(a.data.pubDatetime).getTime() / 1000
-        )
+        Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
+        Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
     );
 }

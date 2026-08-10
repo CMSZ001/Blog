@@ -20,13 +20,13 @@ description: "本站（acmsz.top）对访问统计、评论、本地存储及托
 
 本站不投放广告、不向广告平台发送数据、不设置用于跨站跟踪的 cookie。我们仅收集提供本站功能所需的信息。本站不设置追踪型 cookie，不使用指纹识别；统计数据经处理后不再包含可直接识别个人的信息。
 
-| 信息            | 用途       | 存储                                 |
-| ------------- | -------- | ---------------------------------- |
-| 去标识化统计数据      | 流量与性能分析  | 中国大陆自托管 Umami（`u.acmsz.top`）       |
-| 评论内容、昵称       | 评论功能     | 中国大陆自托管 Artalk（`artalk.acmsz.top`） |
-| 邮箱 / 网站（可选）   | 回复通知、头像  | Artalk 服务器；头像仅以哈希发往 weavatar.com   |
-| IP、User-Agent | 反垃圾、安全   | Artalk 服务器（随评论存储）                  |
-| 主题、评论草稿       | 个性化、草稿保存 | 您的浏览器 localStorage                 |
+| 信息                | 用途             | 存储                                         |
+| ------------------- | ---------------- | -------------------------------------------- |
+| 去标识化统计数据    | 流量与性能分析   | 中国大陆自托管 Umami（`u.acmsz.top`）        |
+| 评论内容、昵称      | 评论功能         | 中国大陆自托管 Artalk（`artalk.acmsz.top`）  |
+| 邮箱 / 网站（可选） | 回复通知、头像   | Artalk 服务器；头像仅以哈希发往 weavatar.com |
+| IP、User-Agent      | 反垃圾、安全     | Artalk 服务器（随评论存储）                  |
+| 主题、评论草稿      | 个性化、草稿保存 | 您的浏览器 localStorage                      |
 
 **分析信息（Umami）。** 自托管 Umami 不设置 cookie、不使用指纹识别，收集用于站点分析的**汇总或去标识化**统计数据：访问页面与来源、设备 / 浏览器 / 系统、大致地区，以及核心 Web 指标（LCP、CLS 等）。原始 IP 不作为分析字段持久化存储，仅临时用于推断大致地区；独立访客识别不依赖 cookie。
 
@@ -78,13 +78,13 @@ This site (acmsz.top) is a personal blog operated by CMSZ ("we"). By using this 
 
 The site runs no advertising, sends no data to ad platforms, and sets no cross-site tracking cookies. We collect only what is needed to provide the site's features. This site sets no tracking cookies and uses no fingerprinting; analytics data is processed so it no longer directly identifies individuals.
 
-| Information | Purpose | Storage |
-| --- | --- | --- |
-| De-identified analytics | Traffic & performance analysis | Self-hosted Umami in mainland China (`u.acmsz.top`) |
-| Comment text, nickname | Comment feature | Self-hosted Artalk in mainland China (`artalk.acmsz.top`) |
-| Email / website (optional) | Reply notifications, avatar | Artalk server; avatar only as a hash sent to weavatar.com |
-| IP, User-Agent | Spam protection, security | Artalk server (stored with the comment) |
-| Theme, comment drafts | Personalisation, draft saving | Your browser's localStorage |
+| Information                | Purpose                        | Storage                                                   |
+| -------------------------- | ------------------------------ | --------------------------------------------------------- |
+| De-identified analytics    | Traffic & performance analysis | Self-hosted Umami in mainland China (`u.acmsz.top`)       |
+| Comment text, nickname     | Comment feature                | Self-hosted Artalk in mainland China (`artalk.acmsz.top`) |
+| Email / website (optional) | Reply notifications, avatar    | Artalk server; avatar only as a hash sent to weavatar.com |
+| IP, User-Agent             | Spam protection, security      | Artalk server (stored with the comment)                   |
+| Theme, comment drafts      | Personalisation, draft saving  | Your browser's localStorage                               |
 
 **Analytics (Umami).** The self-hosted Umami sets no cookies and uses no fingerprinting, and collects **aggregated or de-identified** statistics for site analysis: pages visited and referrer, device / browser / OS, approximate region, and Core Web Vitals (LCP, CLS, etc.). Raw IP is not persisted as an analytics field and is only used transiently to infer an approximate region; unique-visitor counting does not rely on cookies.
 

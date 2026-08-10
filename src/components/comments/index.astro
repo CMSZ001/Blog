@@ -7,9 +7,6 @@ const { pageKey, pageTitle } = Astro.props;
 
 {
   config.comments?.provider === "artalk" && (
-    <Artalk
-      pageKey={pageKey}
-      pageTitle={pageTitle}
-    />
+    <Artalk pageKey={pageKey} pageTitle={pageTitle} />
   )
 }

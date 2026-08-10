@@ -132,14 +132,16 @@ const ogImage = ogImageUrl
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span
         aria-hidden="true"
-        class:list={[
-          "text-muted-foreground max-sm:hidden",
-        ]}
+        class:list={["text-muted-foreground max-sm:hidden"]}
       >
         |
       </span>
       <span class:list={["text-muted-foreground max-sm:hidden"]}>
-        {tplStr(t.post.readingTime, { minutes: remarkPluginFrontmatter.minutesRead })}
+        {
+          tplStr(t.post.readingTime, {
+            minutes: remarkPluginFrontmatter.minutesRead,
+          })
+        }
       </span>
       <span
         aria-hidden="true"

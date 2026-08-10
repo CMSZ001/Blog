@@ -29,10 +29,14 @@ const { url: licenseUrl, name: licenseName } = config.license;
 ---
 
 <div
-  class="relative overflow-hidden rounded-lg bg-muted/50 px-6 py-5 transition"
+  class="bg-muted/50 relative overflow-hidden rounded-lg px-6 py-5 transition"
 >
   <div class="text-foreground/85 text-sm font-semibold">{title}</div>
-  <LinkButton href={url} class="text-foreground break-all text-sm underline decoration-dashed underline-offset-4">{url}</LinkButton>
+  <LinkButton
+    href={url}
+    class="text-foreground text-sm break-all underline decoration-dashed underline-offset-4"
+    >{url}</LinkButton
+  >
   <div class="mt-2 flex flex-wrap gap-x-6 gap-y-1">
     <div>
       <div class="text-foreground/80 text-xs">{t.post.author}</div>
@@ -44,12 +48,10 @@ const { url: licenseUrl, name: licenseName } = config.license;
     </div>
     <div>
       <div class="text-foreground/80 text-xs">{t.post.license}</div>
-      <div class="text-foreground text-sm underline decoration-dashed underline-offset-4">
-        <LinkButton
-          href={licenseUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <div
+        class="text-foreground text-sm underline decoration-dashed underline-offset-4"
+      >
+        <LinkButton href={licenseUrl} target="_blank" rel="noopener noreferrer">
           {licenseName}
         </LinkButton>
       </div>
@@ -57,7 +59,7 @@ const { url: licenseUrl, name: licenseName } = config.license;
   </div>
 
   <IconCreativeCommons
-    class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-accent/10 dark:text-accent/5 size-48"
+    class="text-accent/10 dark:text-accent/5 pointer-events-none absolute top-1/2 right-4 size-48 -translate-y-1/2"
     aria-hidden="true"
   />
 </div>

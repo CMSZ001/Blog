@@ -25,24 +25,27 @@ export async function GET(context: APIContext) {
 
     const rawContent = await container.renderToString(Content);
 
-    const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ""), [
-      async (node) => {
-        await walk(node, (node) => {
-          if (node.name === "a" && node.attributes.href?.startsWith("/")) {
-            node.attributes.href = baseUrl + node.attributes.href;
-          }
-          if (node.name === "img" && node.attributes.src?.startsWith("/")) {
-            node.attributes.src = baseUrl + node.attributes.src;
-          }
-          // Astro 容器渲染可能生成空的 srcset，RSS 阅读器用不到，直接清除
-          if (node.attributes?.srcset === "") {
-            delete node.attributes.srcset;
-          }
-        });
-        return node;
-      },
-      sanitize({ dropElements: ["script", "style"] }),
-    ]);
+    const content = await transform(
+      rawContent.replace(/^<!DOCTYPE html>/, ""),
+      [
+        async node => {
+          await walk(node, node => {
+            if (node.name === "a" && node.attributes.href?.startsWith("/")) {
+              node.attributes.href = baseUrl + node.attributes.href;
+            }
+            if (node.name === "img" && node.attributes.src?.startsWith("/")) {
+              node.attributes.src = baseUrl + node.attributes.src;
+            }
+            // Astro 容器渲染可能生成空的 srcset，RSS 阅读器用不到，直接清除
+            if (node.attributes?.srcset === "") {
+              delete node.attributes.srcset;
+            }
+          });
+          return node;
+        },
+        sanitize({ dropElements: ["script", "style"] }),
+      ]
+    );
 
     items.push({
       link: getPostUrl(post.id, post.filePath, config.site.lang),
