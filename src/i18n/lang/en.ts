@@ -26,6 +26,7 @@ export default {
     previousPost: "Previous Post",
     nextPost: "Next Post",
     readingTime: "{{minutes}} min read",
+    views: "views",
   },
   pagination: {
     prev: "Prev",
@@ -39,7 +40,7 @@ export default {
     allPosts: "All Posts",
   },
   footer: {
-    allRightsReserved: "All rights reserved.",
+    allRightsReserved: "All rights reserved",
   },
   pages: {
     tagTitle: "Tag",

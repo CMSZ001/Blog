@@ -3,6 +3,8 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import Views from "./Views.astro";
+import config from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -11,6 +13,8 @@ type Props = {
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
 const { title, description, ...props } = data;
+
+const viewPath = `${getPostUrl(id, filePath, Astro.currentLocale).replace(/\/+$/, "")}/`;
 ---
 
 <li class="my-6">
@@ -26,6 +30,13 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="flex items-center gap-x-2">
+    <Datetime {...props} />
+    {
+      config.umami.enable && (
+        <Views path={viewPath} class="text-muted-foreground text-sm" />
+      )
+    }
+  </div>
   <p>{description}</p>
 </li>

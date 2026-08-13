@@ -109,6 +109,17 @@ interface CommentsConfig {
   artalk: ArtalkConfig;
 }
 
+interface UmamiConfig {
+  /** Enable page view counts via the Umami share API. Defaults to false. */
+  enable?: boolean;
+  /** Umami instance base URL, e.g. "https://u.acmsz.top" */
+  baseUrl?: string;
+  /** Share token id from Umami Settings → Share */
+  shareId?: string;
+  /** Timezone used by Umami stats queries, e.g. "Asia/Shanghai" */
+  timezone?: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
@@ -121,6 +132,8 @@ interface AstroPaperConfig {
   license?: LicenseConfig;
   /** Comment system config */
   comments?: CommentsConfig;
+  /** Umami analytics page view counts */
+  umami?: UmamiConfig;
 }
 
 type ResolvedSiteConfig = Required<
@@ -146,6 +159,7 @@ export interface ResolvedAstroPaperConfig {
   shareLinks: ShareLink[];
   license: LicenseConfig;
   comments: CommentsConfig | null;
+  umami: Required<UmamiConfig>;
 }
 
 /**

@@ -117,13 +117,17 @@ const rssHref = getRelativeLocaleUrl(
       })();
     </script>
 
+    <!-- Umami 统计与分享查询共用该域，提前建连消除关键路径上的跨源首连延迟 -->
+    <link rel="preconnect" href="https://u.acmsz.top" />
+
     <script
       is:inline
       defer
       src="https://u.acmsz.top/ok.js"
       data-website-id="a02ccbdf-ec9f-46ea-98b6-8af51b0f5696"
       data-domains="acmsz.top"
-      data-performance="true"></script>
+      data-performance="true"
+      data-exclude-hash="true"></script>
 
     <ClientRouter />
   </head>

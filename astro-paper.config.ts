@@ -58,5 +58,11 @@ export default defineAstroPaperConfig({
         params: 'sha256=1&d=mp&s=40&d=retro',
       }
     },
-  }
+  },
+  umami: {
+    enable: true,
+    baseUrl: "https://u.acmsz.top",
+    shareId: "CFirWMQoiIUmgPLm",
+    timezone: "Asia/Shanghai",
+  },
 });

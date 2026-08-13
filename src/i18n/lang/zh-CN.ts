@@ -26,6 +26,7 @@ export default {
     previousPost: "上一篇",
     nextPost: "下一篇",
     readingTime: "需要 {{minutes}} 分钟阅读",
+    views: "次浏览",
   },
   pagination: {
     prev: "上一页",
@@ -39,7 +40,7 @@ export default {
     allPosts: "所有文章",
   },
   footer: {
-    allRightsReserved: "保留所有权利。",
+    allRightsReserved: "保留所有权利",
   },
   pages: {
     tagTitle: "标签",

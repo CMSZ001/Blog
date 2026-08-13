@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import IconEye from "@/assets/icons/IconEye.svg";
+import { useTranslations } from "@/i18n";
+
+type Props = {
+  /** 查询路径；缺省为空表示站点总浏览量 */
+  path?: string;
+} & HTMLAttributes<"span">;
+
+const { path = "", class: className, ...attrs } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<span
+  class:list={["views flex items-center gap-x-1", className]}
+  data-path={path}
+  {...attrs}
+>
+  <IconEye class="size-4" />
+  <span data-views-count class="tabular-nums">0</span>
+  <span>{t.post.views}</span>
+</span>

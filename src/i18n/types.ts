@@ -24,6 +24,7 @@ export interface UIStrings {
     previousPost: string;
     nextPost: string;
     readingTime: string;
+    views: string;
   };
   pagination: {
     prev: string;

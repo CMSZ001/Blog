@@ -1,6 +1,6 @@
 ---
-title: "About"
-description: "A bit about me and this blog."
+title: 关于
+description: A bit about me and this blog.
 ---
 
 AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).

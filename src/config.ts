@@ -41,6 +41,12 @@ const config: ResolvedAstroPaperConfig = {
     name: "CC BY-NC-SA 4.0",
   },
   comments: userConfig.comments ?? null,
+  umami: {
+    enable: userConfig.umami?.enable ?? false,
+    baseUrl: userConfig.umami?.baseUrl ?? "",
+    shareId: userConfig.umami?.shareId ?? "",
+    timezone: userConfig.umami?.timezone ?? "UTC",
+  },
 };
 
 export default config;
