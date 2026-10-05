@@ -31,17 +31,15 @@ try {
 }
 ---
 
-{artalkOrigin && <link rel="preconnect" href={artalkOrigin} />}{
-  avatarOrigin && <link rel="preconnect" href={avatarOrigin} />
-}
+{artalkOrigin && <link rel="preconnect" href={artalkOrigin} />}
+{avatarOrigin && <link rel="preconnect" href={avatarOrigin} />}
 
 <div
   id="artalk"
   data-opts={JSON.stringify(artalkOpts)}
   data-page-key={pageKey}
   data-page-title={pageTitle}
->
-</div>
+></div>
 
 <style is:global>
   #artalk {

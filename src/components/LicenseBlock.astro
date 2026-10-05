@@ -28,15 +28,14 @@ const date = dayjs(pubDatetime)
 const { url: licenseUrl, name: licenseName } = config.license;
 ---
 
-<div
-  class="bg-muted/50 relative overflow-hidden rounded-lg px-6 py-5 transition"
->
+<div class="bg-muted/50 relative overflow-hidden rounded-lg px-6 py-5 transition">
   <div class="text-foreground/85 text-sm font-semibold">{title}</div>
   <LinkButton
     href={url}
     class="text-foreground text-sm break-all underline decoration-dashed underline-offset-4"
-    >{url}</LinkButton
   >
+    {url}
+  </LinkButton>
   <div class="mt-2 flex flex-wrap gap-x-6 gap-y-1">
     <div>
       <div class="text-foreground/80 text-xs">{t.post.author}</div>
@@ -48,9 +47,7 @@ const { url: licenseUrl, name: licenseName } = config.license;
     </div>
     <div>
       <div class="text-foreground/80 text-xs">{t.post.license}</div>
-      <div
-        class="text-foreground text-sm underline decoration-dashed underline-offset-4"
-      >
+      <div class="text-foreground text-sm underline decoration-dashed underline-offset-4">
         <LinkButton href={licenseUrl} target="_blank" rel="noopener noreferrer">
           {licenseName}
         </LinkButton>

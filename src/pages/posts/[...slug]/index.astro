@@ -140,29 +140,25 @@ const viewPath = `${getPostUrl(post.id, post.filePath, locale).replace(/\/+$/, "
         |
       </span>
       <span class:list={["text-muted-foreground max-sm:hidden"]}>
-        {
-          tplStr(t.post.readingTime, {
-            minutes: remarkPluginFrontmatter.minutesRead,
-          })
-        }
+        {tplStr(t.post.readingTime, {
+          minutes: remarkPluginFrontmatter.minutesRead,
+        })}
       </span>
-      {
-        config.umami.enable && (
-          <>
-            <span
-              aria-hidden="true"
-              class:list={["text-muted-foreground max-sm:hidden"]}
-            >
-              |
-            </span>
-            <Views
-              id="article-views"
-              path={viewPath}
-              class="text-muted-foreground"
-            />
-          </>
-        )
-      }
+      {config.umami.enable && (
+        <>
+          <span
+            aria-hidden="true"
+            class:list={["text-muted-foreground max-sm:hidden"]}
+          >
+            |
+          </span>
+          <Views
+            id="article-views"
+            path={viewPath}
+            class="text-muted-foreground"
+          />
+        </>
+      )}
       <span
         aria-hidden="true"
         class:list={[
@@ -184,7 +180,9 @@ const viewPath = `${getPostUrl(post.id, post.filePath, locale).replace(/\/+$/, "
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
     <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      {tags.map(tag => (
+        <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
+      ))}
     </ul>
 
     <LicenseBlock
@@ -207,11 +205,9 @@ const viewPath = `${getPostUrl(post.id, post.filePath, locale).replace(/\/+$/, "
 
     <hr class="my-8 border-dashed" />
 
-    {
-      config.comments?.enable && (
-        <Comments pageKey={Astro.url.pathname} pageTitle={title} />
-      )
-    }
+    {config.comments?.enable && (
+      <Comments pageKey={Astro.url.pathname} pageTitle={title} />
+    )}
   </main>
   <Footer />
 </PostLayout>

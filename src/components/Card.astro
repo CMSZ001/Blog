@@ -26,17 +26,13 @@ const viewPath = `${getPostUrl(id, filePath, Astro.currentLocale).replace(/\/+$/
       "focus-visible:no-underline focus-visible:underline-offset-0",
     ]}
   >
-    <Heading transition:name={toTransitionName(id)}>
-      {title}
-    </Heading>
+    <Heading transition:name={toTransitionName(id)}>{title}</Heading>
   </a>
   <div class="flex items-center gap-x-2">
     <Datetime {...props} />
-    {
-      config.umami.enable && (
-        <Views path={viewPath} class="text-muted-foreground text-sm" />
-      )
-    }
+    {config.umami.enable && (
+      <Views path={viewPath} class="text-muted-foreground text-sm" />
+    )}
   </div>
   <p>{description}</p>
 </li>

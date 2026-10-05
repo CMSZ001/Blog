@@ -5,8 +5,6 @@ import Artalk from "./Artalk.astro";
 const { pageKey, pageTitle } = Astro.props;
 ---
 
-{
-  config.comments?.provider === "artalk" && (
-    <Artalk pageKey={pageKey} pageTitle={pageTitle} />
-  )
-}
+{config.comments?.provider === "artalk" && (
+  <Artalk pageKey={pageKey} pageTitle={pageTitle} />
+)}

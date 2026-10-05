@@ -20,22 +20,20 @@ const currentYear = new Date().getFullYear();
   class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
   {...attrs}
 >
-  <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
-  >
+  <div class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4">
     <Socials />
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>&#169; {currentYear} {config.site.author}</span>
+      <span>
+        &#169; {currentYear} {config.site.author}
+      </span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>{t.footer.allRightsReserved}</span>
-      {
-        config.umami.enable && (
-          <>
-            <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-            <Views />
-          </>
-        )
-      }
+      {config.umami.enable && (
+        <>
+          <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
+          <Views />
+        </>
+      )}
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <a
         href={getRelativeLocaleUrl(config.site.lang, "privacy")}
@@ -47,17 +45,17 @@ const currentYear = new Date().getFullYear();
   </div>
 </footer>
 
-{
-  config.umami.enable && (
-    <>
-      <script
-        is:inline
-        data-umami-views
-        data-umami-base-url={config.umami.baseUrl}
-        data-umami-share-id={config.umami.shareId}
-        data-umami-timezone={config.umami.timezone}
-      />
-      <script>import "@/scripts/umami-views";</script>
-    </>
-  )
-}
+{config.umami.enable && (
+  <>
+    <script
+      is:inline
+      data-umami-views
+      data-umami-base-url={config.umami.baseUrl}
+      data-umami-share-id={config.umami.shareId}
+      data-umami-timezone={config.umami.timezone}
+    />
+    <script>
+      import "@/scripts/umami-views";
+    </script>
+  </>
+)}
